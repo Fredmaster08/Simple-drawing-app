@@ -1,3 +1,5 @@
 
 *.exe
 raylibInclude/
+.vscode
+*.o

@@ -1,6 +1,9 @@
 
 #include <stdio.h>
 #include "raylib.h"
+#include <stdlib.h>
+
+void draw(Vector2* positions, int* index);
 
 int main() {
 
@@ -11,12 +14,28 @@ int main() {
 
     SetTargetFPS(60);
 
+    Vector2 positions[10000];
+    int index = 0;
+
     while(!WindowShouldClose()) {
         
         BeginDrawing();
+        
+        ClearBackground(BLACK);
+        int textWidth = MeasureText("Simple Drawing App", 20);
+        DrawText("Simple Drawing App",(screenwidth / 2) - textWidth / 2, screenHeight / 2 - 10, 20, LIGHTGRAY);
+        draw(positions, &index);
+        for(int i = 0; i <= index; i++) {
+            Color color;
+            color.a = 255;
+            
+            color.r = rand() % 256;
+            color.g = rand() % 256;
+            color.b = rand() % 256;
 
-        ClearBackground(RAYWHITE);
-        DrawText("Jo wsp!", 190, 200, 20, LIGHTGRAY);
+
+            DrawRectangle(positions[i].x, positions[i].y, 25, 25, color);
+        }
 
         EndDrawing();
     }
