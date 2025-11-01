@@ -4,8 +4,6 @@
 
 int main() {
 
-    printf("a\n");
-
     int screenwidth = 800;
     int screenHeight = 450;
 
