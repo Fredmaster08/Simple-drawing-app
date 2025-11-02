@@ -2,7 +2,7 @@
 
 CC = gcc
 CFLAGS = -g
-LDFLAGS = -lraylib -lm
+LDFLAGS = -lraylib -lm -lraygui
 
 SRC_FILES = $(wildcard *.c) 
 OBJ_FILES = $(SRC_FILES:.c=.o) 

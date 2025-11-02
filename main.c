@@ -4,49 +4,57 @@
 #include <stdlib.h>
 #include "draw.h"
 
-
 int main() {
 
-    int screenwidth = 800;
-    int screenHeight = 450;
+    int windowWidth = 1200;
+    int windowHeight = 800;
+    int drawWidth = 950;
+    int drawHeight = 800;
+    int guiWidth = 250;
+    int guiHeight = 800;
 
-    InitWindow(screenwidth, screenHeight, "Fredmaster08 & arina1431");
+    InitWindow(windowWidth, windowHeight, "Fredmaster08 & arina1431");
 
     SetTargetFPS(60);
 
     Brush brushes[10000];
     int index = 0;
 
+    int sizeBrush = 25;
+    Color strokeColor = {
+        .r = 255,
+        .a = 255,
+    };
+
+    Color backgroundColor = {
+        .a = 255,
+    };
+
     while(!WindowShouldClose()) {
         
         BeginDrawing();
         
         ClearBackground(BLACK);
-        int textWidth = MeasureText("Simple Drawing App", 20);
-        DrawText("Simple Drawing App",(screenwidth / 2) - textWidth / 2, screenHeight / 2 - 10, 20, LIGHTGRAY);
-        draw(brushes, &index);
 
-        int size_brush = 25;
+        DrawRectangle(0, 0, drawWidth, drawHeight, backgroundColor);
+
+        // Centered Text
+        int textWidth = MeasureText("Simple Drawing App", 20);
+        DrawText("Simple Drawing App",(drawWidth / 2) - textWidth / 2, drawHeight / 2 - 10, 20, LIGHTGRAY);
+
+        updateBrushes(brushes, &index, &sizeBrush, strokeColor);
 
         for(int i = 0; i <= index; i++) {
-            Color color;
-            color.a = 255;
-            
-            color.r = rand() % 256;
-            color.g = rand() % 256;
-            color.b = rand() % 256;
-
-
-            if(IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
-                DrawRectangle(brushes[i].position.x - 0.5 * size_brush, brushes[i].position.y - 0.5 * size_brush, size_brush, size_brush, brushes[i].color);
+            Brush brush = brushes[i];
+            if (brush.isRectangle) {
+                DrawRectangle(brush.position.x - 0.5 * brush.size, brush.position.y - 0.5 * brush.size, brush.size, brush.size, brush.color);
             }
             else {
-                DrawCircle(brushes[i].position.x, brushes[i].position.y, size_brush, brushes[i].color);
+                DrawCircle(brush.position.x, brush.position.y, brush.size, brush.color);
             }
-
-
         }
 
+        drawGui(drawWidth, guiWidth, guiHeight, &strokeColor, &backgroundColor, brushes, &index);
 
         EndDrawing();
     }
