@@ -7,6 +7,4 @@ void draw(Vector2* positions, int* index) {
         positions[*index] = GetMousePosition();
         (*index)++;
     }
-    
-    
 }

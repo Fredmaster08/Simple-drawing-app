@@ -2,12 +2,18 @@
 
 CC = gcc
 CFLAGS = -g
-LDFLAGS = -lraylib -lm -lopengl32 -lgdi32 -lwinmm
+LDFLAGS = -lraylib -lm
 
 SRC_FILES = $(wildcard *.c) 
 OBJ_FILES = $(SRC_FILES:.c=.o) 
 
 TARGET = main
+
+OS ?= linux
+
+ifeq ($(OS),windows)
+    LDFLAGS += -lopengl32 -lgdi32 -lwinmn -lole32
+endif
 
 all: run
 
