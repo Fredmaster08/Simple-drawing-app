@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include "raylib.h"
 #include <stdlib.h>
+#include "draw.h"
 
-void draw(Vector2* positions, int* index);
 
 int main() {
 
@@ -14,7 +14,7 @@ int main() {
 
     SetTargetFPS(60);
 
-    Vector2 positions[10000];
+    Brush brushes[10000];
     int index = 0;
 
     while(!WindowShouldClose()) {
@@ -24,7 +24,7 @@ int main() {
         ClearBackground(BLACK);
         int textWidth = MeasureText("Simple Drawing App", 20);
         DrawText("Simple Drawing App",(screenwidth / 2) - textWidth / 2, screenHeight / 2 - 10, 20, LIGHTGRAY);
-        draw(positions, &index);
+        draw(brushes, &index);
 
         int size_brush = 25;
 
@@ -36,8 +36,17 @@ int main() {
             color.g = rand() % 256;
             color.b = rand() % 256;
 
-            DrawRectangle(positions[i].x - 0.5 * size_brush, positions[i].y - 0.5 * size_brush, size_brush, size_brush, color);
+
+            if(IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
+                DrawRectangle(brushes[i].position.x - 0.5 * size_brush, brushes[i].position.y - 0.5 * size_brush, size_brush, size_brush, brushes[i].color);
+            }
+            else {
+                DrawCircle(brushes[i].position.x, brushes[i].position.y, size_brush, brushes[i].color);
+            }
+
+
         }
+
 
         EndDrawing();
     }

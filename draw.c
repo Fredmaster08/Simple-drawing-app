@@ -1,10 +1,17 @@
 
 #include "raylib.h"
+#include "draw.h"
 
-void draw(Vector2* positions, int* index) {
+void draw(Brush* brushes, int* index) {
     if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-        //DrawRectangle(GetMouseX(), GetMouseY(), 25, 25, WHITE);
-        positions[*index] = GetMousePosition();
+        brushes[*index].position = GetMousePosition();
+        brushes[*index].color = RED;
+        (*index)++;
+    }
+    if(IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
+        brushes[*index].position = GetMousePosition();
+        brushes[*index].color = GREEN;
         (*index)++;
     }
 }
+

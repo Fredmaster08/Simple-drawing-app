@@ -12,7 +12,8 @@ TARGET = main
 OS ?= linux
 
 ifeq ($(OS),windows)
-    LDFLAGS += -lopengl32 -lgdi32 -lwinmn -lole32
+    LDFLAGS += -lopengl32 -lgdi32 -lwinmm -lole32
+	TARGET = main.exe
 endif
 
 all: run
