@@ -25,6 +25,9 @@ int main() {
         int textWidth = MeasureText("Simple Drawing App", 20);
         DrawText("Simple Drawing App",(screenwidth / 2) - textWidth / 2, screenHeight / 2 - 10, 20, LIGHTGRAY);
         draw(positions, &index);
+
+        int size_brush = 25;
+
         for(int i = 0; i <= index; i++) {
             Color color;
             color.a = 255;
@@ -33,8 +36,7 @@ int main() {
             color.g = rand() % 256;
             color.b = rand() % 256;
 
-
-            DrawRectangle(positions[i].x, positions[i].y, 25, 25, color);
+            DrawRectangle(positions[i].x - 0.5 * size_brush, positions[i].y - 0.5 * size_brush, size_brush, size_brush, color);
         }
 
         EndDrawing();
