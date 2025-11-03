@@ -8,6 +8,6 @@ typedef struct Brush {
     Vector2 position;
     Color color;
 }Brush;
-void draw(Brush* brushes, int* index);
+void draw(Brush* brushes, int* index, Camera2D* camera);
 
 #endif
