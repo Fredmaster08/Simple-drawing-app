@@ -2,7 +2,7 @@
 
 CC = gcc
 CFLAGS = -g -Ivendor/raygui/src
-LDFLAGS = -lraylib -lm -lraygui
+LDFLAGS = -lraylib -lm 
 
 SRC_FILES = $(wildcard *.c) 
 OBJ_FILES = $(SRC_FILES:.c=.o) 
