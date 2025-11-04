@@ -6,6 +6,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdint.h>
 
 typedef struct Brush {
     Vector2 position;
@@ -14,8 +15,8 @@ typedef struct Brush {
     int size;
 } Brush;
 
-void updateBrushes(Brush* brushes, int* index, size_t* capacity, int* sizeBrush, Color color);
+void updateBrushes(int32_t windowWidth, int32_t windowHeight, Brush* brushes, int* index, size_t* capacity, int* sizeBrush, Color color);
 void clearScreen(Brush* brushes, size_t* capacity);
-void drawGui(int guiOffset, int guiWidth, int guiHeight, Color* color, Color* bgColor, Brush* brushes, size_t* capacity);
+void drawGui(int guiOffset, int guiWidth, int guiHeight, Color* color, Color* bgColor, Brush* brushes, size_t* capacity, int32_t* sizeBrush);
 
 #endif

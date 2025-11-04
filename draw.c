@@ -32,9 +32,11 @@ void addBrush(Brush** brushes, int* index, size_t* capacity, Brush* brush) {
     }
 }
 
-void updateBrushes(Brush* brushes, int* index, size_t* capacity, int* sizeBrush, Color color) {
+void updateBrushes(int32_t windowWidth, int32_t windowHeight, Brush* brushes, int* index, size_t* capacity, int* sizeBrush, Color color) {
     previousMousePos = currentMousePos;
     currentMousePos = GetMousePosition();
+    if (currentMousePos.x > windowWidth || 
+        currentMousePos.y > windowHeight) return;
 
     float mouseDist = Vector2Length(GetMouseDelta());
     int32_t lerpCount = 0;
@@ -96,7 +98,7 @@ void clearScreen(Brush *brushes, size_t* capacity) {
     memset(brushes, 0, sizeof(Brush) * *capacity);
 }
 
-void drawGui(int guiOffset, int guiWidth, int guiHeight, Color* color, Color* bgColor, Brush* brushes, size_t* capacity) {
+void drawGui(int guiOffset, int guiWidth, int guiHeight, Color* color, Color* bgColor, Brush* brushes, size_t* capacity, int32_t* sizeBrush) {
     DrawRectangle(guiOffset, 0, guiWidth, guiHeight, DARKGRAY);
 
     int paddingX = 15;
@@ -115,6 +117,12 @@ void drawGui(int guiOffset, int guiWidth, int guiHeight, Color* color, Color* bg
     if (GuiButton((Rectangle){objectXBegin, currentY, objectWidth, buttonHeight}, "Clear Screen")) {
         clearScreen(brushes, capacity);
     }
+    currentY += buttonHeight + paddingY;
+
+    float val = *sizeBrush;
+    GuiSlider((Rectangle){objectXBegin, currentY, objectWidth, buttonHeight}, "", "", &val, 1.0f, 40.0f);
+    *sizeBrush = val;
+
     currentY += buttonHeight + paddingY;
 }
 

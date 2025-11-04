@@ -47,7 +47,7 @@ int main() {
         int textWidth = MeasureText("Simple Drawing App", 20);
         DrawText("Simple Drawing App",(drawWidth / 2) - textWidth / 2, drawHeight / 2 - 10, 20, LIGHTGRAY);
 
-        updateBrushes(brushes, &index, &brushesCapacity, &sizeBrush, strokeColor);
+        updateBrushes(windowWidth, windowHeight, brushes, &index, &brushesCapacity, &sizeBrush, strokeColor);
 
         for(int i = 0; i <= index; i++) {
             Brush brush = brushes[i];
@@ -59,7 +59,7 @@ int main() {
             }
         }
 
-        drawGui(drawWidth, guiWidth, guiHeight, &strokeColor, &backgroundColor, brushes, &brushesCapacity);
+        drawGui(drawWidth, guiWidth, guiHeight, &strokeColor, &backgroundColor, brushes, &brushesCapacity, &sizeBrush);
 
         EndDrawing();
     }
