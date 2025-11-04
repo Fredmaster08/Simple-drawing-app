@@ -59,7 +59,7 @@ int main() {
             }
         }
 
-        drawGui(drawWidth, guiWidth, guiHeight, &strokeColor, &backgroundColor, brushes, &index);
+        drawGui(drawWidth, guiWidth, guiHeight, &strokeColor, &backgroundColor, brushes, &brushesCapacity);
 
         EndDrawing();
     }

@@ -88,13 +88,11 @@ void updateBrushes(Brush* brushes, int* index, size_t* capacity, int* sizeBrush,
     *sizeBrush += GetMouseWheelMove();
 }
 
-void clearScreen(Brush *brushes, int *index) {
-    for (int i = 0; i < *index; i++) {
-        brushes[i] = (Brush){0};
-    }
+void clearScreen(Brush *brushes, size_t* capacity) {
+    memset(brushes, 0, sizeof(Brush) * *capacity);
 }
 
-void drawGui(int guiOffset, int guiWidth, int guiHeight, Color* color, Color* bgColor, Brush* brushes, int* index) {
+void drawGui(int guiOffset, int guiWidth, int guiHeight, Color* color, Color* bgColor, Brush* brushes, size_t* capacity) {
     DrawRectangle(guiOffset, 0, guiWidth, guiHeight, DARKGRAY);
 
     int paddingX = 15;
@@ -111,7 +109,7 @@ void drawGui(int guiOffset, int guiWidth, int guiHeight, Color* color, Color* bg
 
     int buttonHeight = 40;
     if (GuiButton((Rectangle){objectXBegin, currentY, objectWidth, buttonHeight}, "Clear Screen")) {
-        clearScreen(brushes, index);
+        clearScreen(brushes, capacity);
     }
     currentY += buttonHeight + paddingY;
 }
