@@ -16,7 +16,7 @@ typedef struct Brush {
 } Brush;
 
 void updateBrushes(int32_t windowWidth, int32_t windowHeight, Brush* brushes, int* index, size_t* capacity, int* sizeBrush, Color color);
-void clearScreen(Brush* brushes, size_t* capacity);
-void drawGui(int guiOffset, int guiWidth, int guiHeight, Color* color, Color* bgColor, Brush* brushes, size_t* capacity, int32_t* sizeBrush);
+void clearScreen(Brush* brushes, int32_t* index);
+void drawGui(int guiOffset, int guiWidth, int guiHeight, Color* color, Color* bgColor, Brush* brushes, int32_t* index, int32_t* sizeBrush);
 
 #endif
