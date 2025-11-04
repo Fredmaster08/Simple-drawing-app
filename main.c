@@ -20,7 +20,7 @@ int main() {
     size_t brushesCapacity = 10000;
     Brush* brushes = malloc(sizeof(Brush) * brushesCapacity);
     if (!brushes) {
-        fprintf(stderr, "Failed to allocate more memory for brushes size: %d\n", brushesCapacity);
+        fprintf(stderr, "Failed to allocate more memory for brushes size: %zu\n", brushesCapacity);
         return -1;
     }
     int index = 0;

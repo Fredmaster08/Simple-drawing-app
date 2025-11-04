@@ -39,11 +39,15 @@ void updateBrushes(Brush* brushes, int* index, size_t* capacity, int* sizeBrush,
     float mouseDist = Vector2Length(GetMouseDelta());
     int32_t lerpCount = 0;
     float lerp = 0.0f;
+    float lerpInc = 0.0f;
 
     if (mouseDist >= (*sizeBrush * 0.1)) {
         lerpCount = (mouseDist / *sizeBrush) * 2.0f;
         if (lerpCount > 1000) lerpCount = 1000;
+        lerpInc = 1.0f / lerpCount;
+        if (lerpInc < 0.001f) lerpInc = 0.001f;
     }
+
 
     if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
         Brush brush = {
@@ -56,11 +60,11 @@ void updateBrushes(Brush* brushes, int* index, size_t* capacity, int* sizeBrush,
         addBrush(&brushes, index, capacity, &brush);
         
         if (lerpCount != 0) {
-            while (lerp != 1.0f) {
+            while (lerp < 1.0f) {
                 brush.position = Vector2Lerp(previousMousePos, currentMousePos, lerp);
                 brush.color = GREEN; // tmp
                 addBrush(&brushes, index, capacity, &brush);
-                lerp += 1.0f / lerpCount;
+                lerp += lerpInc;
             }
         }
         
@@ -76,11 +80,11 @@ void updateBrushes(Brush* brushes, int* index, size_t* capacity, int* sizeBrush,
         addBrush(&brushes, index, capacity, &brush);
 
          if (lerpCount != 0) {
-            while (lerp != 1.0f) {
+            while (lerp < 1.0f) {
                 brush.position = Vector2Lerp(previousMousePos, currentMousePos, lerp);
                 brush.color = GREEN; // tmp
                 addBrush(&brushes, index, capacity, &brush);
-                lerp += 1.0f / lerpCount;
+                lerp += lerpInc;
             }
         }
     }
