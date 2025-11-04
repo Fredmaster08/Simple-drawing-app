@@ -2,5 +2,6 @@
 *.exe
 raylibInclude/
 .vscode
+.cache/
 *.o
 *.json
