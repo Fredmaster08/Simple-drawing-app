@@ -7,11 +7,32 @@
 #include "raygui.h"
 
 #include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 static Vector2 currentMousePos = (Vector2){0};
 static Vector2 previousMousePos = (Vector2){0};
 
-void updateBrushes(Brush* brushes, int* index, int* sizeBrush, Color color) {
+void addBrush(Brush** brushes, int* index, size_t* capacity, Brush* brush) {
+    Brush* dest = &(*brushes)[*index];
+    memcpy(dest, brush, sizeof(Brush));
+
+    (*index)++;
+
+    if (*index >= *capacity) {
+        *capacity *= 2;
+        printf("Capacity: %zu\n", *capacity);
+        Brush* tmp = realloc(*brushes, sizeof(Brush) * *capacity);
+        if (!tmp) {
+            fprintf(stderr, "Failed to realloc brushes array! Capacity: %zu\n", *capacity);
+            return;
+        }
+        *brushes = tmp;
+    }
+}
+
+void updateBrushes(Brush* brushes, int* index, size_t* capacity, int* sizeBrush, Color color) {
     previousMousePos = currentMousePos;
     currentMousePos = GetMousePosition();
 
@@ -21,45 +42,44 @@ void updateBrushes(Brush* brushes, int* index, int* sizeBrush, Color color) {
 
     if (mouseDist >= (*sizeBrush * 0.1)) {
         lerpCount = (mouseDist / *sizeBrush) * 2.0f;
+        if (lerpCount > 1000) lerpCount = 1000;
     }
 
     if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-        Brush* brush = &brushes[*index];
-        brush->position = GetMousePosition();
-        brush->color = color;
-        brush->isRectangle = true;
-        brush->size = *sizeBrush;
-        (*index)++;
+        Brush brush = {
+            .position = GetMousePosition(),
+            .color = color,
+            .isRectangle = true,
+            .size = *sizeBrush,
+        };
+
+        addBrush(&brushes, index, capacity, &brush);
         
         if (lerpCount != 0) {
             while (lerp != 1.0f) {
-                Brush* brush = &brushes[*index];
-                brush->position = Vector2Lerp(previousMousePos, currentMousePos, lerp);
-                brush->color = GREEN;
-                brush->isRectangle = true;
-                brush->size = *sizeBrush;
-                (*index)++;
+                brush.position = Vector2Lerp(previousMousePos, currentMousePos, lerp);
+                brush.color = GREEN; // tmp
+                addBrush(&brushes, index, capacity, &brush);
                 lerp += 1.0f / lerpCount;
             }
         }
         
     }
     if(IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
-        Brush* brush = &brushes[*index];
-        brush->position = GetMousePosition();
-        brush->color = color;
-        brush->isRectangle = false;
-        brush->size = *sizeBrush;
-        (*index)++;
+        Brush brush = {
+            .position = GetMousePosition(),
+            .color = color, 
+            .isRectangle = false,
+            .size = *sizeBrush,
+        };
 
-        if (lerpCount != 0) {
+        addBrush(&brushes, index, capacity, &brush);
+
+         if (lerpCount != 0) {
             while (lerp != 1.0f) {
-                Brush* brush = &brushes[*index];
-                brush->position = Vector2Lerp(previousMousePos, currentMousePos, lerp);
-                brush->color = GREEN;
-                brush->isRectangle = false;
-                brush->size = *sizeBrush;
-                (*index)++;
+                brush.position = Vector2Lerp(previousMousePos, currentMousePos, lerp);
+                brush.color = GREEN; // tmp
+                addBrush(&brushes, index, capacity, &brush);
                 lerp += 1.0f / lerpCount;
             }
         }

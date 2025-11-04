@@ -17,7 +17,12 @@ int main() {
 
     SetTargetFPS(60);
 
-    Brush brushes[10000];
+    size_t brushesCapacity = 10000;
+    Brush* brushes = malloc(sizeof(Brush) * brushesCapacity);
+    if (!brushes) {
+        fprintf(stderr, "Failed to allocate more memory for brushes size: %d\n", brushesCapacity);
+        return -1;
+    }
     int index = 0;
 
     int sizeBrush = 25;
@@ -42,7 +47,7 @@ int main() {
         int textWidth = MeasureText("Simple Drawing App", 20);
         DrawText("Simple Drawing App",(drawWidth / 2) - textWidth / 2, drawHeight / 2 - 10, 20, LIGHTGRAY);
 
-        updateBrushes(brushes, &index, &sizeBrush, strokeColor);
+        updateBrushes(brushes, &index, &brushesCapacity, &sizeBrush, strokeColor);
 
         for(int i = 0; i <= index; i++) {
             Brush brush = brushes[i];
