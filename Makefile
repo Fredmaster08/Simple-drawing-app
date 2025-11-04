@@ -1,7 +1,7 @@
  
 
 CC = gcc
-CFLAGS = -g
+CFLAGS = -g -Ivendor/raygui/src
 LDFLAGS = -lraylib -lm -lraygui
 
 SRC_FILES = $(wildcard *.c) 
