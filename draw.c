@@ -30,3 +30,4 @@ void draw(Brush* brushes, int* index, Camera2D* camera) {
     }
 }
 
+
