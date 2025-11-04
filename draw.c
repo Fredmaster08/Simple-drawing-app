@@ -2,6 +2,8 @@
 #include "raylib.h"
 #include "draw.h"
 #include "raymath.h"
+#define RAYGUI_IMPLEMENTATION
+#include "vendor/raygui/src/raygui.h"
 
 void draw(Brush* brushes, int* index, Camera2D* camera) {
     Vector2 mousePos = GetScreenToWorld2D(GetMousePosition(), *camera);
@@ -30,4 +32,14 @@ void draw(Brush* brushes, int* index, Camera2D* camera) {
     }
 }
 
-
+void drawGui(Camera2D* camera) {
+    GuiSlider((Rectangle){
+        .x = 10,
+        .y = 10,
+        .width = 100,
+        .height = 30,
+    }, "left", "right", &camera->zoom, 0.4f, 16.0f);
+    camera->target.x = 400;
+    camera->target.y = 300;
+    
+}

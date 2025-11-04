@@ -39,6 +39,8 @@ int main() {
         }
 
         EndMode2D();
+
+        drawGui(&camera);
         EndDrawing();
     }
     CloseWindow();
