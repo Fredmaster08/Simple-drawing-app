@@ -62,7 +62,7 @@ void updateBrushes(Brush* brushes, int* index, size_t* capacity, int* sizeBrush,
         if (lerpCount != 0) {
             while (lerp < 1.0f) {
                 brush.position = Vector2Lerp(previousMousePos, currentMousePos, lerp);
-                brush.color = GREEN; // tmp
+                //brush.color = GREEN; // tmp
                 addBrush(&brushes, index, capacity, &brush);
                 lerp += lerpInc;
             }
@@ -82,7 +82,7 @@ void updateBrushes(Brush* brushes, int* index, size_t* capacity, int* sizeBrush,
          if (lerpCount != 0) {
             while (lerp < 1.0f) {
                 brush.position = Vector2Lerp(previousMousePos, currentMousePos, lerp);
-                brush.color = GREEN; // tmp
+                //brush.color = GREEN; // tmp
                 addBrush(&brushes, index, capacity, &brush);
                 lerp += lerpInc;
             }
