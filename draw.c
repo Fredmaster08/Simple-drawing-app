@@ -1,11 +1,27 @@
 
 #include "raylib.h"
+#include "raymath.h"
 #include "draw.h"
 
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
 
+#include <stdint.h>
+
+static Vector2 currentMousePos = (Vector2){0};
+static Vector2 previousMousePos = (Vector2){0};
+
 void updateBrushes(Brush* brushes, int* index, int* sizeBrush, Color color) {
+    previousMousePos = currentMousePos;
+    currentMousePos = GetMousePosition();
+
+    float mouseDist = Vector2Length(GetMouseDelta());
+    int32_t lerpCount = 0;
+    float lerp = 0.0f;
+
+    if (mouseDist >= (*sizeBrush * 0.1)) {
+        lerpCount = (mouseDist / *sizeBrush) * 2.0f;
+    }
 
     if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
         Brush* brush = &brushes[*index];
@@ -14,7 +30,19 @@ void updateBrushes(Brush* brushes, int* index, int* sizeBrush, Color color) {
         brush->isRectangle = true;
         brush->size = *sizeBrush;
         (*index)++;
-
+        
+        if (lerpCount != 0) {
+            while (lerp != 1.0f) {
+                Brush* brush = &brushes[*index];
+                brush->position = Vector2Lerp(previousMousePos, currentMousePos, lerp);
+                brush->color = GREEN;
+                brush->isRectangle = true;
+                brush->size = *sizeBrush;
+                (*index)++;
+                lerp += 1.0f / lerpCount;
+            }
+        }
+        
     }
     if(IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
         Brush* brush = &brushes[*index];
@@ -23,6 +51,18 @@ void updateBrushes(Brush* brushes, int* index, int* sizeBrush, Color color) {
         brush->isRectangle = false;
         brush->size = *sizeBrush;
         (*index)++;
+
+        if (lerpCount != 0) {
+            while (lerp != 1.0f) {
+                Brush* brush = &brushes[*index];
+                brush->position = Vector2Lerp(previousMousePos, currentMousePos, lerp);
+                brush->color = GREEN;
+                brush->isRectangle = false;
+                brush->size = *sizeBrush;
+                (*index)++;
+                lerp += 1.0f / lerpCount;
+            }
+        }
     }
 
     *sizeBrush += GetMouseWheelMove();
