@@ -1,6 +1,8 @@
 
 #include "raylib.h"
 #include "draw.h"
+
+#define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
 
 void updateBrushes(Brush* brushes, int* index, int* sizeBrush, Color color) {
