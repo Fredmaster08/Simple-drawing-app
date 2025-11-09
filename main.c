@@ -1,5 +1,7 @@
 
 #include <stdio.h>
+#include "raylib.h"
+#include "draw.h"
 
 int main() {
 
