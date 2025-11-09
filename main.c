@@ -1,10 +1,7 @@
 
 #include <stdio.h>
-<<<<<<< HEAD
-=======
 #include "raylib.h"
 #include "draw.h"
->>>>>>> main2
 
 int main() {
 
