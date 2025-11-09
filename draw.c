@@ -33,13 +33,20 @@ void draw(Brush* brushes, int* index, Camera2D* camera) {
 }
 
 void drawGui(Camera2D* camera) {
-    GuiSlider((Rectangle){
+    
+    Rectangle sliderBounds = {
         .x = 10,
         .y = 10,
         .width = 100,
         .height = 30,
-    }, "left", "right", &camera->zoom, 0.4f, 16.0f);
-    camera->target.x = 400;
-    camera->target.y = 300;
-    
+    };
+
+    Vector2 mousePos = GetMousePosition();
+
+
+    if(sliderBounds.x) {
+        camera->offset.x = GetScreenWidth() / 2;
+        camera->offset.y = GetScreenHeight() / 2;
+    }
+    GuiSlider(sliderBounds, "left", "right", &camera->zoom, 0.4f, 16.0f);
 }
