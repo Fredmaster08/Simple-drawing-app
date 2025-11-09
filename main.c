@@ -5,8 +5,6 @@
 
 int main() {
 
-    //printf("Restart IS REAL!\n");
-
     const int screenW = 1000;
     const int screenH = 800;
 
@@ -14,12 +12,20 @@ int main() {
 
     SetTargetFPS(60);
 
+    Brush brushes[10000];
+    Camera2D camera = {0};
+    Vector2 mousePos;
+    Color color;
+
+    int index = 0;
 
     while (!WindowShouldClose()){
         
         BeginDrawing();
 
-            ClearBackground(RAYWHITE);
+        draw(brushes, &color, &index, &camera);
+
+        ClearBackground(BLACK);
 
         EndDrawing();
     }
