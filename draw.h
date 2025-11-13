@@ -9,6 +9,6 @@ typedef struct Brush {
     Color color;
 }Brush;
 
-void draw(Brush* brushes, Color* color, int* index, Camera2D* camera);
+void draw(Brush* brushes, int* index, Camera2D* camera);
 
 #endif

@@ -1,7 +1,7 @@
 
-#include <stdio.h>
 #include "raylib.h"
 #include "draw.h"
+#include "raymath.h"
 
 int main() {
 
@@ -14,19 +14,26 @@ int main() {
 
     Brush brushes[10000];
     Camera2D camera = {0};
-    Vector2 mousePos;
-    Color color;
+ 
 
+    
     int index = 0;
 
     while (!WindowShouldClose()){
         
         BeginDrawing();
-
-        draw(brushes, &color, &index, &camera);
+        BeginMode2D(camera);
 
         ClearBackground(BLACK);
+        draw(brushes, &index, &camera);
 
+
+        //for(int i = 0; i <= index; i++) {
+        //    DrawCircle(brushes[i].position.x, brushes[i].position.y, 5, BLUE);
+        //}
+
+
+        EndMode2D();
         EndDrawing();
     }
     
