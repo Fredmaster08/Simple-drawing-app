@@ -28,9 +28,9 @@ int main() {
         draw(brushes, &index, &camera);
 
 
-        //for(int i = 0; i <= index; i++) {
-        //    DrawCircle(brushes[i].position.x, brushes[i].position.y, 5, BLUE);
-        //}
+        for(int i = 0; i <= index; i++) {
+            DrawCircle(brushes[i].position.x, brushes[i].position.y, 5, BLUE);
+        }
 
 
         EndMode2D();
