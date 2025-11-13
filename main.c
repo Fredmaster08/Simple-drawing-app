@@ -14,7 +14,7 @@ int main() {
 
     Brush brushes[10000];
     Camera2D camera = {0};
- 
+    camera.zoom = 1.0f;
 
     
     int index = 0;

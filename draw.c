@@ -16,6 +16,11 @@ void draw(Brush* brushes, int* index, Camera2D* camera) {
             DrawCircle(brushes[i].position.x, brushes[i].position.y, brushSize, brushes[i].color);
         }
     }
+    
+    //if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+    //    Vector2 mousePos = GetMousePosition();
+    //    DrawCircle(mousePos.x, mousePos.y, 10, RED);
+    //}
 }
 
 void erase(){
