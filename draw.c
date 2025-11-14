@@ -37,14 +37,17 @@ void erase(Brush* brushes, int* index, Camera2D* camera){
     }
 }
 
-void zoom(Camera2D* zoom) {
-    Camera2D camera = {0};
-    camera.zoom = 1.0f;
+void wheel(Camera2D* camera) {
+    camera->zoom = 1.0f;
 
     int zoomMode = 0;
     float wheel = GetMouseWheelMove();
 
     if(zoomMode == 0) {
-        Vector2 mouseworlPos = GetScreenToWorld2D(GetMousePosition())
+        Vector2 mouseworldPos = GetScreenToWorld2D(GetMousePosition(), *camera);
+        camera->offset = GetMousePosition();
+        camera->target = mouseworldPos;
+        float scale = 0.2f*wheel;
+        camera->zoom = Clamp(expf(logf(camera->zoom)+scale), 0.125f, 64.0f);
     }
 }

@@ -15,6 +15,7 @@ int main() {
 
     Brush brushes[10000];
     Camera2D camera = {0};
+    Camera2D zoom = {0};
     camera.zoom = 1.0f;
 
     
@@ -32,6 +33,7 @@ int main() {
         ClearBackground(BLACK);
         draw(brushes, &index, &camera);
         erase(brushes, &index, &camera);
+        wheel(&camera);
 
         for(int i = 0; i <= index; i++) {
             DrawCircle(brushes[i].position.x, brushes[i].position.y, sizeBrush, brushes[i].color);
