@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "draw.h"
 #include "raymath.h"
+#include <stdio.h>
 
 
 void draw(Brush* brushes, int* index, Camera2D* camera) {
@@ -49,4 +50,25 @@ void wheel(Camera2D* camera) {
         float scale = 0.2f*wheel;
         camera->zoom = Clamp(expf(logf(camera->zoom)+scale), 0.125f, 64.0f);
     }
+}
+
+void selectBrushColor() {
+    int r, g, b;
+    Color brushColor = {r, g, b, 255};
+    printf("Enter R G B values:\n");
+    
+    printf("R: ");
+    scanf("%d", &r);
+
+    printf("G: ");
+    scanf("%d", &g);
+
+    printf("B: ");
+    scanf("%d", &b);
+
+    r = Clamp(r, 0, 255);
+    g = Clamp(g, 0, 255);
+    b = Clamp(b, 0, 255);
+
+    
 }
