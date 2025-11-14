@@ -24,7 +24,7 @@ all: run
 $(TARGET): $(OBJ_FILES)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-run: $(TARGET)
+run: clean $(TARGET)
 	./$(TARGET)
 
 clean:

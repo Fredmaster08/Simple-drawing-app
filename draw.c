@@ -38,7 +38,6 @@ void erase(Brush* brushes, int* index, Camera2D* camera){
 }
 
 void wheel(Camera2D* camera) {
-    camera->zoom = 1.0f;
 
     int zoomMode = 0;
     float wheel = GetMouseWheelMove();

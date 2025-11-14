@@ -20,8 +20,8 @@ int main() {
 
     
     int index = 0;
-
     int sizeBrush;  
+    
     printf("Sizebrush?: ");
     scanf("%d", &sizeBrush);
 
