@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "draw.h"
 #include "raymath.h"
+#include <stdio.h>
 
 int main() {
 
@@ -19,6 +20,10 @@ int main() {
     
     int index = 0;
 
+    int sizeBrush;  
+    printf("Sizebrush?: ");
+    scanf("%d", &sizeBrush);
+
     while (!WindowShouldClose()){
         
         BeginDrawing();
@@ -26,12 +31,11 @@ int main() {
 
         ClearBackground(BLACK);
         draw(brushes, &index, &camera);
-
+        erase(brushes, &index, &camera);
 
         for(int i = 0; i <= index; i++) {
-            DrawCircle(brushes[i].position.x, brushes[i].position.y, 5, BLUE);
+            DrawCircle(brushes[i].position.x, brushes[i].position.y, sizeBrush, brushes[i].color);
         }
-
 
         EndMode2D();
         EndDrawing();

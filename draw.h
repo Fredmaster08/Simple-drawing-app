@@ -10,5 +10,6 @@ typedef struct Brush {
 }Brush;
 
 void draw(Brush* brushes, int* index, Camera2D* camera);
+void erase(Brush* brushes, int* index, Camera2D* camera);
 
 #endif
