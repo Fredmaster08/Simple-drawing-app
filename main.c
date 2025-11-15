@@ -26,6 +26,8 @@ int main() {
     Camera2D zoom = {0};
     camera.zoom = 1.0f;
 
+    printf("Mattef");
+
     int index = 0;
 
     while (!WindowShouldClose()){
