@@ -24,8 +24,9 @@ int main() {
     Camera2D zoom = {0};
     camera.zoom = 1.0f;
 
-    Color brush = selectBrushColor();
-    
+    selectBrushColor(&r, &g, &b);
+
+    Color brushColor = {r, g, b, 255};
 
     int index = 0;
 
@@ -34,16 +35,14 @@ int main() {
         BeginDrawing();
         BeginMode2D(camera);
 
-        Color brushColor = {r, g, b, 255};
-
 
         ClearBackground(BLACK);
-        draw(brushes, &index, &camera);
+        draw(brushes, &index, &camera, brushColor);
         erase(brushes, &index, &camera);
         wheel(&camera);
 
         for(int i = 0; i <= index; i++) {
-            DrawCircle(brushes[i].position.x, brushes[i].position.y, sizeBrush, brushColor);
+            DrawCircle(brushes[i].position.x, brushes[i].position.y, sizeBrush, brushes[i].color);
         }
         EndMode2D();
         EndDrawing();

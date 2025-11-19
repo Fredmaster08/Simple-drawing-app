@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 
-void draw(Brush* brushes, int* index, Camera2D* camera) {
+void draw(Brush* brushes, int* index, Camera2D* camera, Color color) {
     Vector2 mousePos = GetScreenToWorld2D(GetMousePosition(), *camera);
     int brushSize = 20;
     if(IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsKeyDown(KEY_LEFT_CONTROL)) {
@@ -16,11 +16,8 @@ void draw(Brush* brushes, int* index, Camera2D* camera) {
     else if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
         int i = *index;
         brushes[i].position = mousePos;
-        brushes[i].color = BLUE;
+        brushes[i].color = color;
         (*index)++;
-        for(int i = 0; i <= *index; i++) {
-            DrawCircle(brushes[i].position.x, brushes[i].position.y, brushSize, brushes[i].color);
-        }
     }
 }
 
@@ -32,9 +29,6 @@ void erase(Brush* brushes, int* index, Camera2D* camera){
         brushes[i].position = mousePos;
         brushes[i].color = BLACK;
         (*index)++;
-        for(int i = 0; i <= *index; i++) {
-            DrawCircle(brushes[i].position.x, brushes[i].position.y, brushSize, brushes[i].color);
-        }
     }
 }
 
@@ -52,24 +46,21 @@ void wheel(Camera2D* camera) {
     }
 }
 
-Color selectBrushColor() {
-    int r, g, b;
-    Color brushColor = {r, g, b, 255};
+void selectBrushColor(int* r, int* g, int* b) {
     printf("Enter R G B values:\n");
     
     printf("R: ");
-    scanf("%d", &r);
+    scanf("%d", r);
 
     printf("G: ");
-    scanf("%d", &g);
+    scanf("%d", g);
 
     printf("B: ");
-    scanf("%d", &b);
+    scanf("%d", b);
 
-    r = Clamp(r, 0, 255);
-    g = Clamp(g, 0, 255);
-    b = Clamp(b, 0, 255);
+    *r = Clamp(*r, 0, 255);
+    *g = Clamp(*g, 0, 255);
+    *b = Clamp(*b, 0, 255);
 
-    Color brushColor = {r, g, b, 255};
-    return brushColor;
+    
 }

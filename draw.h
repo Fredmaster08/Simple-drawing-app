@@ -10,9 +10,9 @@ typedef struct Brush {
     Color color;
 }Brush;
 
-void draw(Brush* brushes, int* index, Camera2D* camera);
+void draw(Brush* brushes, int* index, Camera2D* camera, Color color);
 void erase(Brush* brushes, int* index, Camera2D* camera);
 void wheel(Camera2D* camera);
-Color selectBrushColor();
+void selectBrushColor(int* r, int* g, int* b);
 
 #endif
