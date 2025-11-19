@@ -52,7 +52,7 @@ void wheel(Camera2D* camera) {
     }
 }
 
-void selectBrushColor() {
+Color selectBrushColor() {
     int r, g, b;
     Color brushColor = {r, g, b, 255};
     printf("Enter R G B values:\n");
@@ -70,5 +70,6 @@ void selectBrushColor() {
     g = Clamp(g, 0, 255);
     b = Clamp(b, 0, 255);
 
-    
+    Color brushColor = {r, g, b, 255};
+    return brushColor;
 }

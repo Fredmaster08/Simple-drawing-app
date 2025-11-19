@@ -11,12 +11,10 @@ int main() {
 
     int sizeBrush;
     int r, g, b;
-    Color brushColor = {r, g, b, 255};
+    
 
     printf("Sizebrush: ");
     scanf("%d", &sizeBrush);
-
-    selectBrushColor();
 
     InitWindow(screenW, screenH, "drawing window");
     SetTargetFPS(60);
@@ -26,14 +24,18 @@ int main() {
     Camera2D zoom = {0};
     camera.zoom = 1.0f;
 
-    printf("Mattef");
+    Color brush = selectBrushColor();
+    
 
     int index = 0;
 
-    while (!WindowShouldClose()){
+    while (!WindowShouldClose()) {
         
         BeginDrawing();
         BeginMode2D(camera);
+
+        Color brushColor = {r, g, b, 255};
+
 
         ClearBackground(BLACK);
         draw(brushes, &index, &camera);

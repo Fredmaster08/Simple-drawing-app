@@ -13,6 +13,6 @@ typedef struct Brush {
 void draw(Brush* brushes, int* index, Camera2D* camera);
 void erase(Brush* brushes, int* index, Camera2D* camera);
 void wheel(Camera2D* camera);
-void selectBrushColor();
+Color selectBrushColor();
 
 #endif
